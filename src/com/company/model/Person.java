@@ -5,17 +5,17 @@ package com.company.model;
  */
 public class Person {
 
-    private Long id;
+    private Long idPerson;
     private String firstName;
     private String lastName;
 
     /**
      * Constructor person
-     * @param id
+     * @param idPerson
      * @param firstName
      * @param lastName
      */
-    public Person(Long id,String firstName, String lastName) {
+    public Person(Long idPerson, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -30,16 +30,16 @@ public class Person {
      * getter id
      * @return id
      */
-    public Long getId() {
-        return id;
+    public Long getIdPerson() {
+        return idPerson;
     }
 
     /**
      * Setter id
-     * @param id
+     * @param idPerson
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdPerson(Long idPerson) {
+        this.idPerson = idPerson;
     }
 
     /**

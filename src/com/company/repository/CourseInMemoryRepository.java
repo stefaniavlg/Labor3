@@ -12,9 +12,9 @@ public class CourseInMemoryRepository implements ICrudRepository<Course> {
     private List<Course> courses = new ArrayList<>();
 
     @Override
-    public Course findOne(Long id){
+    public Course findOne(Long idEntity){
         for (Course course:courses) {
-            if(course.getId()==id){
+            if(course.getIdCourse()== idEntity){
                 return course;
             }
         }
@@ -28,11 +28,11 @@ public class CourseInMemoryRepository implements ICrudRepository<Course> {
 
     @Override
     public Course save(Course entity){
-        if(findOne(entity.getId())==null){
+        if(findOne(entity.getIdCourse())==null){
             courses.add(entity);
             return null;
         }
-        return findOne(entity.getId());
+        return findOne(entity.getIdCourse());
     }
 
     @Override
@@ -48,9 +48,9 @@ public class CourseInMemoryRepository implements ICrudRepository<Course> {
 
     @Override
     public Course update(Course entity){
-        if(findOne(entity.getId())!=null){
+        if(findOne(entity.getIdCourse())!=null){
             for (Course course : courses) {
-                if(course.getId()==entity.getId()){
+                if(course.getIdCourse()==entity.getIdCourse()){
                     course.setName(entity.getName());
                     course.setMaxEnrollment(entity.getMaxEnrollment());
                     course.setCredits(entity.getCredits());

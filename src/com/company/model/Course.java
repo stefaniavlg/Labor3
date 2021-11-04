@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Course {
 
-    private Long id;
+    private Long idCourse;
     private String name;
     private Person teacher;
     private int maxEnrollment;
@@ -98,15 +98,15 @@ public class Course {
 
     /**
      * Constructor Course
-     * @param id
+     * @param idCourse
      * @param name
      * @param teacher
      * @param maxEnrollment
      * @param studentsEnrolled
      * @param credits
      */
-    public Course(Long id, String name, Person teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
-        this.id = id;
+    public Course(Long idCourse, String name, Person teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
+        this.idCourse = idCourse;
         this.name = name;
         this.teacher = teacher;
         this.maxEnrollment = maxEnrollment;
@@ -122,17 +122,17 @@ public class Course {
 
     /**
      * Getter id
-     * @return id
+     * @return idCourse
      */
-    public Long getId() {
-        return id;
+    public Long getIdCourse() {
+        return idCourse;
     }
 
     /**
      * Setter id
-     * @param id
+     * @param idCourse
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCourse(Long idCourse) {
+        this.idCourse = idCourse;
     }
 }

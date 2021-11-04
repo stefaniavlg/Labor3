@@ -12,9 +12,9 @@ public class TeacherInMemoryRepository implements ICrudRepository<Teacher> {
     List<Teacher> teachers = new ArrayList<>();
 
     @Override
-    public Teacher findOne(Long id) {
+    public Teacher findOne(Long idEntity) {
         for (Teacher teacher : teachers) {
-            if (teacher.getId() == id) {
+            if (teacher.getIdPerson() == idEntity) {
                 return teacher;
             }
         }
@@ -28,19 +28,19 @@ public class TeacherInMemoryRepository implements ICrudRepository<Teacher> {
 
     @Override
     public Teacher save(Teacher entity) {
-        if (findOne(entity.getId()) != null) {
+        if (findOne(entity.getIdPerson()) != null) {
             teachers.add(entity);
             return null;
         }
-        return findOne(entity.getId());
+        return findOne(entity.getIdPerson());
     }
 
     @Override
-    public Teacher delete(Long id) {
-        if (findOne(id) != null) {
+    public Teacher delete(Long idEntity) {
+        if (findOne(idEntity) != null) {
             Teacher tea = new Teacher();
-            tea = findOne(id);
-            teachers.remove(id);
+            tea = findOne(idEntity);
+            teachers.remove(idEntity);
             return tea;
         }
         return null;
@@ -48,9 +48,9 @@ public class TeacherInMemoryRepository implements ICrudRepository<Teacher> {
 
     @Override
     public Teacher update(Teacher entity) {
-        if (findOne(entity.getId()) != null) {
+        if (findOne(entity.getIdPerson()) != null) {
             for (Teacher teacher : teachers) {
-                if (teacher.getId()==entity.getId()) {
+                if (teacher.getIdPerson()==entity.getIdPerson()) {
                     teacher.setFirstName(teacher.getLastName());
                     teacher.setLastName(teacher.getLastName());
                     teacher.setCourses(teacher.getCourses());

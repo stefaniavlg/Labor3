@@ -12,9 +12,9 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
     private List<Student> students = new ArrayList<>();
 
     @Override
-    public Student findOne(Long id){
+    public Student findOne(Long idEntity){
         for(Student student : students){
-            if(student.getStudentId()==id){
+            if(student.getStudentId()== idEntity){
                 return student;
             }
         }
@@ -37,11 +37,11 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
     }
 
     @Override
-    public Student delete(Long id){
-        if(findOne(id)!=null) {
+    public Student delete(Long idEntity){
+        if(findOne(idEntity)!=null) {
             Student s = new Student();
-            s= findOne(id);
-            students.remove(findOne(id));
+            s= findOne(idEntity);
+            students.remove(findOne(idEntity));
             return s;
         }
         return null;

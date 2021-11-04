@@ -10,7 +10,6 @@ public class Teacher extends Person {
 
 
     private List<Course> courses = new ArrayList<>();
-    //private Long id;
 
     /**
      * getter list of courses

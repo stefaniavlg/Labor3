@@ -5,11 +5,11 @@ package com.company.repository;
  */
 public interface ICrudRepository<E> {
 
-    /**Find the entity with the specified id
-     * @param id
+    /**Find the entity with the specified idEntity
+     * @param idEntity
      * @return
      */
-    E findOne(Long id);
+    E findOne(Long idEntity);
 
     /**Find all entities
      * @return all entities

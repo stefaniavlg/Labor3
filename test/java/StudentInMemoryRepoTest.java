@@ -17,15 +17,15 @@ public class StudentInMemoryRepoTest {
     private List<Student> students = new ArrayList<>();
 
     private StudentInMemoryRepository studentrepo = new StudentInMemoryRepository();
-    private Student s = new Student(Long.valueOf(12), 12, courses);
+    private Student student = new Student(Long.valueOf(12), 12, courses);
 
     /**
      * test for findOne
      */
     @Test
     public void findOneTest() {
-        studentrepo.save(s);
-        assertEquals(s, studentrepo.findOne(Long.valueOf(12)));
+        studentrepo.save(student);
+        assertEquals(student, studentrepo.findOne(Long.valueOf(12)));
     }
 
     /**
@@ -33,7 +33,7 @@ public class StudentInMemoryRepoTest {
      */
     @Test
     public void findAllTest() {
-        studentrepo.save(s);
+        studentrepo.save(student);
 
     }
 
@@ -42,7 +42,7 @@ public class StudentInMemoryRepoTest {
      */
     @Test
     public void saveTest() {
-        assertEquals(null, studentrepo.save(s));
+        assertEquals(null, studentrepo.save(student));
     }
 
     /**
@@ -58,7 +58,7 @@ public class StudentInMemoryRepoTest {
      */
     @Test
     public void updateTest() {
-        assertEquals(s,studentrepo.update(s));
+        assertEquals(student,studentrepo.update(student));
 
     }
 }
