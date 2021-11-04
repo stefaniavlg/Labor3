@@ -11,11 +11,6 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
 
     private List<Student> students = new ArrayList<>();
 
-    /**
-     *
-     * @param id -the id of the entity to be returned id must not be null
-     * @return
-     */
     @Override
     public Student findOne(Long id){
         for(Student student : students){
@@ -26,20 +21,12 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
         return null;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public List<Student> findAll(){
         return students;
     }
 
-    /**
-     *
-     * @param entity entity must be not null
-     * @return
-     */
+
     @Override
     public Student save(Student entity){
         if(findOne(entity.getStudentId())==null){
@@ -49,11 +36,6 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
         return findOne((entity.getStudentId()));
     }
 
-    /**
-     *
-     * @param id id must be not null
-     * @return
-     */
     @Override
     public Student delete(Long id){
         if(findOne(id)!=null) {
@@ -65,11 +47,6 @@ public class StudentInMemoryRepository implements ICrudRepository<Student> {
         return null;
     }
 
-    /**
-     *
-     * @param entity entity must not be null
-     * @return
-     */
     @Override
     public Student update(Student entity){
         if(findOne(entity.getStudentId())!=null) {
