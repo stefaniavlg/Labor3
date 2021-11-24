@@ -27,7 +27,11 @@ public class Student extends Person {
     /**
      * constructor
      */
-    public Student(){}
+    public Student(String name, String name2, int i, int i1){}
+
+    public Student() {
+
+    }
 
 
     /**

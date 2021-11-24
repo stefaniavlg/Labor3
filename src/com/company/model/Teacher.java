@@ -11,6 +11,13 @@ public class Teacher extends Person {
 
     private List<Course> courses = new ArrayList<>();
 
+    public Teacher(String name, String name1) {
+    }
+
+    public Teacher() {
+
+    }
+
     /**
      * getter list of courses
      * @return courses

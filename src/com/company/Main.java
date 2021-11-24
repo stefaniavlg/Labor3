@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.view.ConsoleView;
+
 /**
  * Main class where program starts.
  */
@@ -10,6 +12,9 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Start point");
+
+        //System.out.println("Start point");
+        ConsoleView consoleView = new ConsoleView();
+        consoleView.run();
     }
 }

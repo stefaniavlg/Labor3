@@ -8,12 +8,15 @@ import java.util.List;
  */
 public class Course {
 
-    private Long idCourse;
+    private long idCourse;
     private String name;
     private Person teacher;
     private int maxEnrollment;
     private List<Student> studentsEnrolled = new ArrayList<>();
     private int credits;
+
+    public Course(int i, String course, Teacher name, int i1, int i2) {
+    }
 
 
     /**

@@ -10,6 +10,7 @@ import java.util.List;
 public class CourseInMemoryRepository implements ICrudRepository<Course> {
 
     private List<Course> courses = new ArrayList<>();
+    //List<Course> kurse = InMemoryRepository.getKursList();
 
     @Override
     public Course findOne(Long idEntity){
