@@ -81,4 +81,21 @@ public class Student extends Person {
     public void setEnrolledCourses(List<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
+
+    /**
+     * Adds a course into the list of courses and updates the credits of this student
+     * @param course
+     * @return
+     */
+    public Student addCourse(Course course) {
+        enrolledCourses.add(course);
+        setTotalCredits(totalCredits + course.getCredits());
+
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + totalCredits;
+    }
 }

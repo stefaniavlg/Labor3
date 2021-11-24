@@ -9,7 +9,13 @@ import java.util.List;
 
 public class TeacherInMemoryRepository implements ICrudRepository<Teacher> {
 
-    List<Teacher> teachers = new ArrayList<>();
+    private List<Teacher> teachers;
+
+    public TeacherInMemoryRepository setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+
+        return this;
+    }
 
     @Override
     public Teacher findOne(Long idEntity) {

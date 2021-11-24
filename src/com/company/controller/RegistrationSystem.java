@@ -4,180 +4,150 @@ package com.company.controller;
 import com.company.model.Course;
 import com.company.model.Student;
 import com.company.repository.CourseInMemoryRepository;
+import com.company.repository.ICrudRepository;
 import com.company.repository.StudentInMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RegistrationSystem {
 
-    private final CourseInMemoryRepository kursRepository = new CourseInMemoryRepository();
-    private final StudentInMemoryRepository studentRepository = new StudentInMemoryRepository();
+    private ICrudRepository repository;
 
     /**
-     *
-     * @param name Name eines Kurs
-     * @return ein Kurs
+     * @param repository
      */
-    public Course getKursbyName(String name) {
-        List<Course> kurses = getAllCourses();
-        int i = 0;
-        while(i < kurses.size()){
-            if (kurses.get(i).getName().equals(name)){
-                break;
-            }
-            i ++;
-        }
-        return kurses.get(i);
+    public RegistrationSystem(ICrudRepository repository) {
+        this.repository = repository;
     }
 
     /**
-     *
-     * @param kurs Einen Kurs
-     * @param student Einen Student
-     * @return gibt true wenn der Student sich an den Kurs registrieren kann und false wenn es nocht moglich ist
+     * @return ICrudRepository
      */
-    public boolean register(Course kurs, Student student){
-        List<Student> students = kurs.getStudentsEnrolled();
-        List<Course> kursList = student.getEnrolledCourses();
-        if (students==null){
-            students = new ArrayList();
-        }
-        if (kursList==null){
-            kursList = new ArrayList();
-        }
+    public ICrudRepository getRepository() {
+        return repository;
+    }
 
-        if (kurs.getMaxEnrollment() == students.size()) {
-            return false;
-        } else
-            if (student.getTotalCredits() + kurs.getCredits() < 30) {
-                kursList.add(kurs);
-                students.add(student);
-                kurs.setStudentsEnrolled(students);
-                student.setEnrolledCourses(kursList);
-                student.setTotalCredits(student.getTotalCredits() + kurs.getCredits());
+    /**
+     * Checks if there is space for a new user and if the users credits do not exceed 30
+     * Adds him to the course, and the course to the student
+     *
+     * @param course
+     * @param student
+     * @return boolean
+     */
+    public boolean register(Course course, Student student){
+        if(course.getMaxEnrollment() >= getNrOfFreePlaces(course)){
+            if(student.getTotalCredits() + course.getCredits() <= 30) {
+                course.addStudent(student);
+                student.addCourse(course);
                 return true;
-        } else return false;
-    }
-
-    /**
-     *
-     * @return Alle Kurse die noch freie platze haben
-     */
-    public List<Course> retrieveCursesWithFreePlaces(){
-        List<Course> availableKurse = new ArrayList<>();
-        Iterable<Course> kursList = kursRepository.findAll();
-        for (Course kurs : kursList) {
-            if (kurs.getStudentsEnrolled() == null) {
-                availableKurse.add(kurs);
-            } else {
-                if (kurs.getStudentsEnrolled().size() < kurs.getMaxEnrollment()) {
-                    availableKurse.add(kurs);
-                }
-
             }
         }
-        return availableKurse;
+
+        return false;
     }
 
     /**
+     * Goes over all the courses, and checks if the course has any available spaces
+     * Builds a list with all the courses that meet the criteria, and returns it
      *
-     * @param kurses Liste der Kurse die in der Console dargestellt werden
+     * @return List<Course>
      */
-    public void listKurs(List<Course> kurses){
-        for (Course kurs : kurses) {
-            System.out.println("ID: " + kurs.getIdCourse() + " Name: " + kurs.getName() + " Lehrer: " + kurs.getTeacher().getFirstName() + " " + kurs.getTeacher().getLastName() + " Credit: " + kurs.getCredits() + " MaxStudenten: " + kurs.getMaxEnrollment());
-        }
-        System.out.println("\n");
-    }
-
-    /**
-     *
-     * @param kurs Kurs der geloscht werden soll
-     */
-    public void deleteKurs(long kurs){
-        kursRepository.delete(kurs);
-    }
-
-    /**
-     *
-     * @param kurs ein Kurs
-     * @return gibt eine List aller Studenten die an einen Kurs registriert sind
-     */
-    public List<Student> retrieveStudentsEnrolledForACourse(Course kurs){
-        return kurs.getStudentsEnrolled();
-    }
-
-    public void listStudent(List<Student> students){
-        for (Student student : students) {
-            System.out.println("StudentID: " + student.getStudentId() + " FistName: " + student.getFirstName() + " LastName: " + student.getLastName() + " Credits: " + student.getTotalCredits());
-        }
-        System.out.println("\n");
-    }
-
-    /**
-     *
-     * @return gibt eine List mit alle Kurse
-     */
-    public List<Course> getAllCourses() {
-        return (List<Course>) kursRepository.findAll();
-
-    }
-
-    /**
-     *
-     * @return alle Studenten
-     */
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
-    }
-
-    /**
-     *
-     * @param studentList liste von Studenten
-     * @return eine Liste von studenten Sortiert nach anzahl Credits ASC
-     */
-    public ArrayList<Student> sortStudentsByCredits(ArrayList<Student> studentList){
-        Collections.unmodifiableList(studentList);
-        return studentList;
-    }
-
-    /**
-     *
-     * @param student ein Student
-     * @return true wenn der Student zu die Liste hinzugefugt wurde, false wenn nicht
-     */
-    public boolean addStudent(Student student){
-        if (studentRepository.save(student) != null){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean addKurs(Course kurs){
-        if (kursRepository.save(kurs) != null){
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @param students Liste von Studenten
-     * @param credit anzahl Credits nach dem man die Liste sortiert
-     * @return die Filtrierte Liste von Studenten
-     */
-    public List<Student> filterByCredit(List<Student> students, int credit){
-        List<Student> filteredList = new ArrayList<>();
-        for (Student student: students){
-            if (student.getTotalCredits() > credit){
-                filteredList.add(student);
+    public List<Course> retrieveCoursesWithFreePlaces(){
+        List<Course> coursesWithFreePlaces = new ArrayList<>();
+        for(Course course : getAllCourses()){
+            if(getNrOfFreePlaces(course) != 0){
+                coursesWithFreePlaces.add(course);
             }
         }
-        return filteredList;
+
+        return coursesWithFreePlaces;
     }
 
+    /**
+     * Returns the list of students from a course
+     *
+     * @param course
+     * @return List<Student>
+     */
+    public List<Student> retrieveStudentsEnrolledForACourse(Course course){
+        return course.getStudentsEnrolled();
+    }
+
+    /**
+     * Returns a list of all courses
+     *
+     * @return List<Course>
+     */
+    public List<Course> getAllCourses(){
+        return (List<Course>) repository.findAll();
+    }
+
+    /**
+     * Serches for the course and deletes it and returns the course if it was succesfully deleted, or null otherwise
+     *
+     * @param course
+     * @return Course
+     */
+    public Course deleteCourseByTeacher(Course course){
+        if (course != null) {
+            repository.delete(course.getIdCourse());
+            for(Student student : retrieveStudentsEnrolledForACourse(course)){
+                student.setTotalCredits(student.getTotalCredits() - course.getCredits());
+            }
+            return course;
+        }
+
+        return null;
+    }
+
+    /**
+     * Calculetes the free places for a course
+     *
+     * @param course
+     * @return int
+     */
+    public int getNrOfFreePlaces(Course course){
+        if(course.getStudentsEnrolled() == null){
+            return course.getMaxEnrollment();
+        }
+
+        return course.getMaxEnrollment() - course.getStudentsEnrolled().size();
+    }
+
+    /**
+     * Sorts the students by first name
+     *
+     * @param students
+     * @return List<Student>
+     */
+    public List<Student> sortStudents(List<Student> students){
+        List<Student> sortedList = new ArrayList<>();
+        sortedList.addAll(students);
+        Collections.sort(sortedList,new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return s1.getFirstName().compareToIgnoreCase(s2.getFirstName());
+            }
+        });
+        return sortedList;
+    }
+
+    /**
+     * Filters the courses with a specific number of credits
+     *
+     * @param credits
+     * @return List<Course>
+     */
+    public List<Course> filterCoursesByCredits(int credits){
+        return getAllCourses().stream()
+                .filter(course -> course.getCredits() == credits)
+                .collect(Collectors.toList());
+    }
 
 
 

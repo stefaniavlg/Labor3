@@ -9,7 +9,13 @@ import java.util.List;
 
 public class StudentInMemoryRepository implements ICrudRepository<Student> {
 
-    private List<Student> students = new ArrayList<>();
+    private List<Student> students;
+
+    public StudentInMemoryRepository setStudents(List<Student> students) {
+        this.students = students;
+
+        return this;
+    }
 
     @Override
     public Student findOne(Long idEntity){

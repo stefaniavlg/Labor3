@@ -33,5 +33,19 @@ public class Teacher extends Person {
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
+    /**
+     * Adds a course into his list
+     * @param course
+     * @return this
+     */
+    public Teacher addCourse(Course course) {
+        courses.add(course);
 
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

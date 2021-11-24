@@ -138,4 +138,13 @@ public class Course {
     public void setIdCourse(Long idCourse) {
         this.idCourse = idCourse;
     }
+
+    public Course addStudent(Student student){
+        studentsEnrolled.add(student);
+
+        return this;
+    }
+
+
+
 }

@@ -9,8 +9,11 @@ import java.util.List;
 
 public class CourseInMemoryRepository implements ICrudRepository<Course> {
 
-    private List<Course> courses = new ArrayList<>();
-    //List<Course> kurse = InMemoryRepository.getKursList();
+    private List<Course> courses;
+    public CourseInMemoryRepository setCourses(List<Course> courses) {
+        this.courses = courses;
+        return this;
+    }
 
     @Override
     public Course findOne(Long idEntity){
