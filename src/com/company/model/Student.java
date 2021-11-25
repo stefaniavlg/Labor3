@@ -14,9 +14,9 @@ public class Student extends Person {
 
     /**
      * constructor
-     * @param studentId
-     * @param totalCredits
-     * @param enrolledCourses
+     * @param studentId -
+     * @param totalCredits -
+     * @param enrolledCourses -
      */
     public Student(long studentId, int totalCredits, List<Course> enrolledCourses) {
         this.studentId = studentId;
@@ -27,11 +27,10 @@ public class Student extends Person {
     /**
      * constructor
      */
-    public Student(String name, String name2, int i, int i1){}
+    //public Student(String name, String name2, int i, int i1){}
 
-    public Student() {
-
-    }
+    public Student() {}
+    public <R> Student(String s, String s1, R collect) {}
 
 
     /**
@@ -44,7 +43,7 @@ public class Student extends Person {
 
     /**
      * setter studentId
-     * @param studentId
+     * @param studentId -
      */
     public void setStudentId(long studentId) {
         this.studentId = studentId;
@@ -60,7 +59,7 @@ public class Student extends Person {
 
     /**
      * setter total credits
-     * @param totalCredits
+     * @param totalCredits -
      */
     public void setTotalCredits(int totalCredits) {
         this.totalCredits = totalCredits;
@@ -76,7 +75,7 @@ public class Student extends Person {
 
     /**
      * setter enrolled coureses
-     * @param enrolledCourses
+     * @param enrolledCourses -
      */
     public void setEnrolledCourses(List<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
@@ -84,8 +83,8 @@ public class Student extends Person {
 
     /**
      * Adds a course into the list of courses and updates the credits of this student
-     * @param course
-     * @return
+     * @param course -
+     * @return this
      */
     public Student addCourse(Course course) {
         enrolledCourses.add(course);

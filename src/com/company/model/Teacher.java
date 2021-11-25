@@ -18,6 +18,9 @@ public class Teacher extends Person {
 
     }
 
+    public <R> Teacher(String s, String s1, R collect) {
+    }
+
     /**
      * getter list of courses
      * @return courses
@@ -28,19 +31,18 @@ public class Teacher extends Person {
 
     /**
      * setter list of courses
-     * @param courses
+     * @param courses -
      */
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
     /**
      * Adds a course into his list
-     * @param course
+     * @param course -
      * @return this
      */
     public Teacher addCourse(Course course) {
         courses.add(course);
-
         return this;
     }
 

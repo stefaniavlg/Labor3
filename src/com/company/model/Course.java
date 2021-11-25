@@ -15,7 +15,8 @@ public class Course {
     private List<Student> studentsEnrolled = new ArrayList<>();
     private int credits;
 
-
+    public <R> Course(String s, long parseLong, int parseInt, int parseInt1, R collect) {
+    }
 
 
     /**
@@ -28,11 +29,12 @@ public class Course {
 
     /**
      * Setter name
-     * @param name
+     * @param name -
      */
     public void setName(String name) {
-        this.name = name;
-    }
+       this.name = name;
+   }
+
 
     /**
      * GETTER teacher
@@ -44,7 +46,7 @@ public class Course {
 
     /**
      * Setter teacher
-     * @param teacher
+     * @param teacher -
      */
     public void setTeacher(Person teacher) {
         this.teacher = teacher;
@@ -60,7 +62,7 @@ public class Course {
 
     /**
      * Setter max enrollment
-     * @param maxEnrollment
+     * @param maxEnrollment -
      */
     public void setMaxEnrollment(int maxEnrollment) {
         this.maxEnrollment = maxEnrollment;
@@ -76,7 +78,7 @@ public class Course {
 
     /**
      * Setter studentsEnrolled
-     * @param studentsEnrolled
+     * @param studentsEnrolled -
      */
     public void setStudentsEnrolled(List<Student> studentsEnrolled) {
         this.studentsEnrolled = studentsEnrolled;
@@ -84,7 +86,7 @@ public class Course {
 
     /**
      * Getter credits
-     * @return
+     * @return credits
      */
     public int getCredits() {
         return credits;
@@ -92,7 +94,7 @@ public class Course {
 
     /**
      * Setter Credits
-     * @param credits
+     * @param credits -
      */
     public void setCredits(int credits) {
         this.credits = credits;
@@ -100,12 +102,12 @@ public class Course {
 
     /**
      * Constructor Course
-     * @param idCourse
-     * @param name
-     * @param teacher
-     * @param maxEnrollment
-     * @param studentsEnrolled
-     * @param credits
+     * @param idCourse -
+     * @param name -
+     * @param teacher -
+     * @param maxEnrollment -
+     * @param studentsEnrolled -
+     * @param credits -
      */
     public Course(Long idCourse, String name, Person teacher, int maxEnrollment, List<Student> studentsEnrolled, int credits) {
         this.idCourse = idCourse;
@@ -132,7 +134,7 @@ public class Course {
 
     /**
      * Setter id
-     * @param idCourse
+     * @param idCourse -
      */
     public void setIdCourse(Long idCourse) {
         this.idCourse = idCourse;

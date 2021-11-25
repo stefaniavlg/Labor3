@@ -18,17 +18,17 @@ public class StartApp {
         StudentInMemoryRepository studentRepository = new StudentInMemoryRepository();
         CourseInMemoryRepository courseRepository = new CourseInMemoryRepository();
 
-        CSVStudentFileReader csvStudentFileReader = new CSVStudentFileReader(courseRepository);
-        CSVTeacherFileReader csvTeacherFileReader = new CSVTeacherFileReader(courseRepository);
-        CSVCourseFileReader csvCourseFileReader = new CSVCourseFileReader();
+        CSVReader csvStudentFileReader = new CSVReader(courseRepository);
+        CSVReader csvTeacherFileReader = new CSVReader(courseRepository);
+        CSVReader csvCourseFileReader = new CSVReader(courseRepository);
 
         CSVStudentFileWriter csvStudentFileWriter = new CSVStudentFileWriter();
         CSVCourseFileWriter csvCourseFileWriter = new CSVCourseFileWriter();
         CSVTeacherFileWriter csvTeacherFileWriter = new CSVTeacherFileWriter();
 
-        courseRepository.setCourses(csvCourseFileReader.readFromCSVFile());
-        teacherRepository.setTeachers(csvTeacherFileReader.readFromCSVFile());
-        studentRepository.setStudents(csvStudentFileReader.readFromCSVFile());
+        courseRepository.setCourses(CSVReader.readCourses());
+        teacherRepository.setTeachers(CSVReader.readTeachers());
+        studentRepository.setStudents(CSVReader.readStudents());
 
         RegistrationSystem controller = new RegistrationSystem(courseRepository);
 
