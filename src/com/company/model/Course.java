@@ -15,8 +15,7 @@ public class Course {
     private List<Student> studentsEnrolled = new ArrayList<>();
     private int credits;
 
-    public Course(int i, String course, Teacher name, int i1, int i2) {
-    }
+
 
 
     /**

@@ -1,0 +1,11 @@
+Id, First Name, Last Name, Credits, Courses
+1, Victor, Ion, 10, [5; 4]
+2, Florin, Florin, 18, [5; 4; 9; 1]
+3, Ioana, Virca, 9, [2; 1]
+4, Marcel, Helena, 9, [7; 2]
+5, Andrei, Zob, 4, [7]
+6, Paula, Ori, 5, [6]
+7, Diana, Cana, 5, [6]
+8, Laura, Nori, 0, []
+9, Ramona, Puff, 12, [8; 9; 10]
+10, Ilie, Mazi, 4, [8]
